@@ -1,17 +1,24 @@
 package com.RokuEng.les3.domains;
 
+import lombok.Getter;
 import lombok.SneakyThrows;
+import lombok.ToString;
 
 import java.util.Date;
 
+@ToString
 public class Message {
-
+    @Getter
     private String content;
+
     private String imagePath;
+
     private Date date;
+
+    @Getter
     private int readCount;
 
-    public void printMessage() {
+    public void printContent() {
         System.out.println(content);
     }
 
@@ -24,5 +31,11 @@ public class Message {
 
     public void printDate() {
         System.out.println(date);
+    }
+
+    public Message(String content, String imagePath, Date date) {
+        this.content = content;
+        this.imagePath = imagePath;
+        this.date = date;
     }
 }
