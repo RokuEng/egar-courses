@@ -8,8 +8,7 @@ import java.util.Date;
 
 @ToString
 public class Message {
-    @Getter
-    private String content;
+    protected String content;
 
     private String imagePath;
 

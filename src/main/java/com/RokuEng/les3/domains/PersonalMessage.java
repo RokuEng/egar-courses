@@ -6,8 +6,10 @@ public class PersonalMessage extends Message {
 
     @Override
     public void printContent() {
-        System.out.println("НЕ ДЛЯ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ! " + getContent());
+        System.out.println("НЕ ДЛЯ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ! " + super.content);
     }
+
+
 
     public PersonalMessage(String content, String imagePath, Date date) {
         super(content, imagePath, date);
