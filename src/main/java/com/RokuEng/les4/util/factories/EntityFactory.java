@@ -1,29 +1,29 @@
-package com.RokuEng.les4.utils.factories;
+package com.RokuEng.les4.util.factories;
 
 import com.RokuEng.les4.core.domains.Entity;
-import com.RokuEng.les4.core.domains.npc.*;
+import com.RokuEng.les4.core.domains.playable.*;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class EntityFactory {
 
     public Entity createArcher() {
-        return new Archer(0.1f);
+        return new Archer(10);
     }
 
     public Entity createDwarf() {
-        return new Dwarf(1f);
+        return new Dwarf(100);
     }
 
     public Entity createElf() {
-        return new Elf(1f);
+        return new Elf(100);
     }
 
     public Entity createMage() {
-        return new Mage(0.05f);
+        return new Mage(5, 100);
     }
 
     public Entity createWarrior() {
-        return new Warrior(0.3f);
+        return new Warrior(30);
     }
 }
