@@ -1,6 +1,6 @@
-package com.RokuEng.les4.core.domains.playable;
+package com.RokuEng.les4.core.domain.playable;
 
-import com.RokuEng.les4.core.domains.Entity;
+import com.RokuEng.les4.core.domain.Entity;
 import lombok.Getter;
 
 public class Mage extends Entity {

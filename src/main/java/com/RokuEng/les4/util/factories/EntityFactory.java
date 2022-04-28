@@ -1,7 +1,7 @@
 package com.RokuEng.les4.util.factories;
 
-import com.RokuEng.les4.core.domains.Entity;
-import com.RokuEng.les4.core.domains.playable.*;
+import com.RokuEng.les4.core.domain.Entity;
+import com.RokuEng.les4.core.domain.playable.*;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
