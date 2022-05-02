@@ -1,19 +1,13 @@
-package com.RokuEng.les4.core.domain.creature.hero;
+package com.RokuEng.les4.core.domain.creature.npc;
 
 import com.RokuEng.les4.core.domain.actions.Ability;
 import com.RokuEng.les4.core.domain.creature.Unit;
-import com.RokuEng.les4.core.domain.trait.Profession;
-import com.RokuEng.les4.core.domain.trait.Race;
 
-public abstract class Hero extends Unit implements Race, Profession {
+public abstract class Npc extends Unit {
 
-	protected int lvl;
-
-	public Hero(int hp) {
+	public Npc(int hp) {
 		super(hp);
 	}
-
-	abstract void levelAbility(Unit enemy);
 
 	@Override
 	public void attack(Unit unit) {
@@ -21,8 +15,6 @@ public abstract class Hero extends Unit implements Race, Profession {
 		if (unit.isDeath()) {
 			return;
 		}
-
-		onAttack(unit);
 
 		if (unit.isDeath()) {
 			unit.death(this);
@@ -38,16 +30,10 @@ public abstract class Hero extends Unit implements Race, Profession {
 			return;
 		}
 
-		onProtect(fromTarget);
 	}
 
 	@Override
 	public void apply(Ability action) {
 		action.apply(this);
-	}
-
-	public void updateLvl() {
-		System.out.printf("Новый уровень! ");
-		this.lvl += 1;
 	}
 }

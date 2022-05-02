@@ -1,6 +1,12 @@
 package com.RokuEng.les4.core.domain.item.armor;
 
+import com.RokuEng.les4.core.domain.actions.Ability;
+
 public interface Protectable {
-    int protect();
+    Ability protect();
+
+    default int getArmor() {
+        return 0;
+    }
 
 }
