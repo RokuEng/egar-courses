@@ -15,47 +15,47 @@ public class Application {
 		Hero guard = HeroFactory.getGuard();
 		Hero killer = HeroFactory.getKiller();
 
-		peasant.attack(guard);
-
-		System.out.println();
-
-		guard.addProtectables(ItemFactory.getChestplate());
-
-		System.out.println();
-
-		peasant.addApplyables(ItemFactory.getHealthstone());
-
-		System.out.println();
-
-		peasant.attack(guard);
-
-		System.out.println();
-
-		guard.attack(peasant);
-
-		System.out.println();
-
-		guard.attack(peasant);
-
-		System.out.println();
-
-		guard.attack(peasant);
-
-		System.out.println();
-
-		guard.attack(peasant);
-
-		System.out.println();
-
-		guard.attack(NpcFactory.getSlime());
-
-		System.out.println();
-
-		guard.attack(NpcFactory.getSlime());
-
-		System.out.println();
-
-		killer.attack(guard);
+//		peasant.attack(guard);
+//
+//		System.out.println();
+//
+//		guard.addProtectables(ItemFactory.getChestplate());
+//
+//		System.out.println();
+//
+//		peasant.addApplyables(ItemFactory.getHealthstone());
+//
+//		System.out.println();
+//
+//		peasant.attack(guard);
+//
+//		System.out.println();
+//
+//		guard.attack(peasant);
+//
+//		System.out.println();
+//
+//		guard.attack(peasant);
+//
+//		System.out.println();
+//
+//		guard.attack(peasant);
+//
+//		System.out.println();
+//
+//		guard.attack(peasant);
+//
+//		System.out.println();
+//
+//		guard.attack(NpcFactory.getSlime());
+//
+//		System.out.println();
+//
+//		guard.attack(NpcFactory.getSlime());
+//
+//		System.out.println();
+//
+//		killer.attack(guard);
 
 	}
 
