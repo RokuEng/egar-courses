@@ -17,7 +17,6 @@ public abstract  class Unit {
 	@Getter
 	@Setter
 	private int hp;
-	private String killer;
 
 	@Getter
 	private final List<Protectable> protectables = new ArrayList<>();
