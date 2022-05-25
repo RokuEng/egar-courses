@@ -1,15 +1,16 @@
-package com.RokuEng.entity;
+package com.RokuEng.entity.hero;
 
+import com.RokuEng.entity.Persistent;
+import com.RokuEng.entity.hero.Hero;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Warrior {
+public class Warrior implements Persistent<Integer> {
 
     @Id
     @GeneratedValue
