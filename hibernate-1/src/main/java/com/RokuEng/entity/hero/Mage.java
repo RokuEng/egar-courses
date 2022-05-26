@@ -9,15 +9,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@NoArgsConstructor
-@NamedQuery(
-        name = "exists tasks query",
-        query = "SELECT m FROM Mage m WHERE m.hero.tasks IS NOT EMPTY"
-)
-@NamedQuery(
-        name = "health more that",
-        query = "SELECT m FROM Mage m WHERE m.hero.health > :health"
-)
 public class Mage implements Persistent<Integer> {
 
     @Id

@@ -4,34 +4,41 @@ import com.RokuEng.entity.Persistent;
 import com.RokuEng.util.EMFUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import java.util.List;
+import javax.persistence.FetchType;
 import java.util.function.Function;
 
-public interface Dao<T extends Persistent, ID> {
-    T findById(ID id);
+public interface Dao<E extends Persistent<? extends ID>, ID> {
+    E findById(ID id);
 
-    default T save(T t) {
+    default E save(E e) {
         EntityManager entityManager = EMFUtil.entityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
 
-        if (t.getId() == null) {
-            entityManager.persist(t);
+        if (e.getId() == null) {
+            entityManager.persist(e);
             entityManager.getTransaction().commit();
-            entityManager.close();
-            return t;
+            return e;
         } else {
+            E merge = entityManager.merge(e);
             entityManager.getTransaction().commit();
-            T merge = entityManager.merge(t);
-            entityManager.close();
             return merge;
         }
+    }
+
+    default <T> T useEntityManager(FetchType fetchType, Function<EntityManager, T> function) {
+        EntityManager entityManager = EMFUtil.entityManagerFactory().createEntityManager();
+        T result = function.apply(entityManager);
+
+        if (fetchType == FetchType.EAGER) {
+            entityManager.close();
+        }
+
+        return result;
     }
 
     default <T> T useEntityManager(Function<EntityManager, T> function) {
         EntityManager entityManager = EMFUtil.entityManagerFactory().createEntityManager();
         T result = function.apply(entityManager);
-//        entityManager.close();
         return result;
     }
 }
