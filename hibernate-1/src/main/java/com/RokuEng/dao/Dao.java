@@ -2,9 +2,15 @@ package com.RokuEng.dao;
 
 import com.RokuEng.entity.Persistent;
 import com.RokuEng.util.EMFUtil;
+import com.RokuEng.util.TriFunction;
 
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public interface Dao<E extends Persistent<? extends ID>, ID> {
@@ -26,19 +32,38 @@ public interface Dao<E extends Persistent<? extends ID>, ID> {
     }
 
     default <T> T useEntityManager(FetchType fetchType, Function<EntityManager, T> function) {
-        EntityManager entityManager = EMFUtil.entityManagerFactory().createEntityManager();
-        T result = function.apply(entityManager);
+        EntityManager em = EMFUtil.entityManagerFactory().createEntityManager();
+        T result = function.apply(em);
 
         if (fetchType == FetchType.EAGER) {
-            entityManager.close();
+            em.close();
         }
 
         return result;
     }
 
     default <T> T useEntityManager(Function<EntityManager, T> function) {
-        EntityManager entityManager = EMFUtil.entityManagerFactory().createEntityManager();
-        T result = function.apply(entityManager);
-        return result;
+        return useEntityManager(FetchType.LAZY, function);
+    }
+
+//    default List<E> useCriteriaQuery(Class<E> clazz, BiFunction<CriteriaBuilder, CriteriaQuery<E>, CriteriaQuery<E>> function) {
+//        return useEntityManager(em ->
+//        {
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<E> query = cb.createQuery(clazz);
+//            query = function.apply(cb, query);
+//            return em.createQuery(query).getResultList();
+//        });
+//    }
+
+    default List<E> useCriteriaQuery(Class<E> clazz, TriFunction<CriteriaBuilder, CriteriaQuery<E>, Root<E>, CriteriaQuery<E>> function) {
+        return useEntityManager(em ->
+        {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<E> query = cb.createQuery(clazz);
+            Root<E> root = query.from(clazz);
+            query = function.apply(cb, query, root);
+            return em.createQuery(query).getResultList();
+        });
     }
 }

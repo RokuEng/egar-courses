@@ -38,16 +38,25 @@ public class MageDao implements Dao<Mage, Integer> {
     }
 
     public List<Mage> findByNameAndAndDamage(String pattern, Float health, Float damage) {
-        return useEntityManager(em -> {
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Mage> query = cb.createQuery(Mage.class);
-
-            Root<Mage> from = query.from(Mage.class);
-            Join<Mage, Hero> join = from.join("hero");
-
-            query.where(cb.like(join.get("name"), pattern), cb.greaterThan(join.get("health"), health), cb.greaterThan(join.get("damage"), damage));
-
-            return em.createQuery(query).getResultList();
+//        return useEntityManager(em -> {
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<Mage> query = cb.createQuery(Mage.class);
+//
+//            Root<Mage> from = query.from(Mage.class);
+//            Join<Mage, Hero> join = from.join("hero");
+//
+//            query.where(cb.like(join.get("name"), pattern), cb.greaterThan(join.get("health"), health), cb.greaterThan(join.get("damage"), damage));
+//
+//            return em.createQuery(query).getResultList();
+//        });
+        return useCriteriaQuery(Mage.class, (cb, query, root) ->
+        {
+            Join<Mage, Hero> join = root.join("hero");
+            return query.where(
+                    cb.like(join.get("name"), pattern),
+                    cb.greaterThan(join.get("health"), health),
+                    cb.greaterThan(join.get("damage"), damage)
+            );
         });
     }
 
