@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import java.util.function.Supplier;
 
 @Configuration
-@EnableScheduling
+//@EnableScheduling
 @ComponentScan("com.RokuEng.springdata")
 public class AccountConfiguration {
     @Bean

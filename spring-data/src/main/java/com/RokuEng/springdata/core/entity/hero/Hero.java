@@ -7,6 +7,7 @@ import com.RokuEng.springdata.core.entity.task.Task;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -30,11 +31,14 @@ public class Hero implements Persistent<Integer> {
 
     private Float damage;
 
+    @Column(name = "cache")
     private BigDecimal cache;
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hero")
     private List<Item> items = new ArrayList<>();
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "hero_task",
             joinColumns = @JoinColumn(name = "hero_id"),

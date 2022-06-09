@@ -12,11 +12,13 @@ public class Account {
 
     @PostConstruct
     private void init() {
-        this.money = BigDecimal.ZERO;
+        this.money = BigDecimal.TEN;
         this.rate = BigDecimal.valueOf(1d + Math.random());
     }
 
     public void apply(Integer seconds) {
+        System.out.println(money);
         money = money.multiply(rate);
+        System.out.println(money);
     }
 }
