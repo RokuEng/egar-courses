@@ -1,7 +1,5 @@
 package com.RokuEng.springdata.repo;
 
-import com.RokuEng.springdata.core.entity.hero.Hero;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
